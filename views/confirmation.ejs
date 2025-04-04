@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Innovatex Confirmation - GIET Hackathon</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --bg: #f9fafb;
+      --card-bg: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: var(--card-bg);
+      padding: 3rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e5e7eb;
+    }
+
+    .title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      font-size: 1rem;
+      text-align: center;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .section {
+      margin-top: 2rem;
+    }
+
+    .highlight-box {
+      background-color: #eef2ff;
+      padding: 1rem 1.5rem;
+      border-left: 4px solid var(--primary);
+      border-radius: 8px;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .list {
+      margin-top: 0.5rem;
+      padding-left: 1.2rem;
+      line-height: 1.8;
+      color: var(--muted);
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-top: 3rem;
+      border-top: 1px solid #e5e7eb;
+      padding-top: 1.5rem;
+    }
+
+    .team-name {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 2rem 1.5rem;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="title">✅ Confirmation Slip</div>
+    <div class="subtitle">Innovatex Hackathon @ GIET Baniatangi</div>
+
+    <p>Hello <span class="team-name"><%= team.teamName %></span>, your team has been successfully verified for the Innovatex Hackathon 2025.</p>
+
+    <div class="section">
+      <div class="highlight-box">
+        <p><strong>Team ID:</strong> <%= team._id %></p>
+        <p><strong>Track:</strong> <%= team.track %></p>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📍 Venue</div>
+      <p>GIET University, Main Auditorium, Gunupur, Odisha</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">📅 Date & Time</div>
+      <p>10th April 2025, 9:00 AM – 6:00 PM</p>
+    </div>
+
+    <div class="section">
+      <div class="section-title">🧾 What to Bring</div>
+      <ul class="list">
+        <li>Digital or printed confirmation slip</li>
+        <li>Original college ID card (for all members)</li>
+        <li>Laptop & charger</li>
+      </ul>
+    </div>
+
+    <div class="footer">
+      Thanks for registering. We can’t wait to see what you build! 🚀<br />
+      — Innovatex Team, GIET University
+    </div>
+  </div>
+</body>
+</html>

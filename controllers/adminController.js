@@ -13,7 +13,7 @@ export const verifyTeamPayment = async (req, res) => {
 
     // Update confirmation slip only if verified
     team.confirmationSlip = team.isVerified 
-      ? `https://gietx.onrender.com/confirmation/${team._id}`
+      ? `http://localhost:8000/confirmation/${team._id}`
       : null;
 
     await team.save();
@@ -23,6 +23,7 @@ export const verifyTeamPayment = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 /** Delete a Team */

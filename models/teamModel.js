@@ -8,7 +8,8 @@ const teamSchema = new mongoose.Schema(
       {
         name: { type: String, required: true },
         email: { type: String, required: true },
-        role: { type: String, required: true },
+        contactNo: { type: String, required: true },
+        gender: { type: String, required: true },
       },
     ],
     paymentScreenshot: { type: String, required: true },
@@ -17,6 +18,7 @@ const teamSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 
 const Team = mongoose.model("Team", teamSchema);
 export default Team;
