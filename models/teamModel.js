@@ -15,10 +15,12 @@ const teamSchema = new mongoose.Schema(
     paymentScreenshot: { type: String, required: true },
     isVerified: { type: Boolean, default: false },
     confirmationSlip: { type: String, default: "" },
+
+    teamId: { type: String, default: null },
+    verificationDate: { type: Date, default: null },
   },
   { timestamps: true }
 );
-
 
 const Team = mongoose.model("Team", teamSchema);
 export default Team;

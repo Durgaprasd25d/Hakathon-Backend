@@ -109,21 +109,33 @@
 
     <p>Hello <span class="team-name"><%= team.teamName %></span>, your team has been successfully verified for the Innovatex Hackathon 2025.</p>
 
-    <div class="section">
-      <div class="highlight-box">
-        <p><strong>Team ID:</strong> <%= team._id %></p>
-        <p><strong>Track:</strong> <%= team.track %></p>
-      </div>
+    <div class="highlight-box" style="margin-top: 1rem; margin-bottom: 1rem;">
+      <strong>Team ID:</strong> <%= team.teamId %>
     </div>
+    
+    <div class="section">
+      <div class="section-title">👥 Team Members</div>
+      <ul class="list">
+        <% team.members.forEach(member => { %>
+          <li>
+            <strong><%= member.name %></strong> –
+            <%= member.email %> |
+            <%= member.contactNo %> |
+            <%= member.gender %>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
+    
 
     <div class="section">
       <div class="section-title">📍 Venue</div>
-      <p>GIET University, Main Auditorium, Gunupur, Odisha</p>
+      <p>GIET Baniatngi, Main Auditorium, Baniatangi, Bhubaneswar, Odisha</p>
     </div>
 
     <div class="section">
       <div class="section-title">📅 Date & Time</div>
-      <p>10th April 2025, 9:00 AM – 6:00 PM</p>
+      <p>16th April 2025, 8:00 AM</p>
     </div>
 
     <div class="section">
@@ -137,7 +149,7 @@
 
     <div class="footer">
       Thanks for registering. We can’t wait to see what you build! 🚀<br />
-      — Innovatex Team, GIET University
+      — Innovatex Team, GIET Baniatngi
     </div>
   </div>
 </body>

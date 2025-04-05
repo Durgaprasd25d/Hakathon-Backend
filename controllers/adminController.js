@@ -1,6 +1,11 @@
 import Team from "../models/teamModel.js";
 
-/** Verify Team Payment */
+// Auto-increment utility
+const assignTeamId = async () => {
+  const totalVerified = await Team.countDocuments({ isVerified: true });
+  return `Team ${totalVerified + 1}`;
+};
+
 export const verifyTeamPayment = async (req, res) => {
   try {
     const { teamName } = req.params;
@@ -8,23 +13,30 @@ export const verifyTeamPayment = async (req, res) => {
 
     if (!team) return res.status(404).json({ error: "Team not found" });
 
-    // Toggle verification status
     team.isVerified = !team.isVerified;
 
-    // Update confirmation slip only if verified
-    team.confirmationSlip = team.isVerified 
-      ? `https://gietx.onrender.com/confirmation/${team._id}`
-      : null;
+    if (team.isVerified) {
+      // Assign sequential team ID only once
+      if (!team.teamId) team.teamId = await assignTeamId();
+      team.verificationDate = new Date();
+      team.confirmationSlip = `https://gietx.onrender.com/confirmation/${team._id}`;
+    } else {
+      // If unverified, clear confirmation details
+      team.confirmationSlip = null;
+      team.verificationDate = null;
+      team.teamId = null;
+    }
 
     await team.save();
 
-    res.json({ message: `Payment ${team.isVerified ? "verified" : "unverified"}`, team });
+    res.json({
+      message: `Payment ${team.isVerified ? "verified" : "unverified"}`,
+      team,
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
-
-
 
 /** Delete a Team */
 export const deleteTeam = async (req, res) => {

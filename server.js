@@ -39,7 +39,6 @@ app.use("/api/admin", adminRoutes);
 app.get("/confirmation/:id", async (req, res) => {
   try {
     const team = await Team.findById(req.params.id);
-
     if (!team || !team.isVerified) {
       return res.status(404).send("Team not found or not verified.");
     }
@@ -49,6 +48,8 @@ app.get("/confirmation/:id", async (req, res) => {
     res.status(500).send("Internal Server Error");
   }
 });
+
+
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
