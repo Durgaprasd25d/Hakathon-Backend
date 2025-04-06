@@ -4,17 +4,20 @@ import cloudinary from "../config/cloudinary.js";
 /** Register a Team */
 export const registerTeam = async (req, res) => {
   try {
-    const { teamName, track } = req.body;
+    const { teamName, track, collegeName } = req.body;
     const file = req.file;
 
     if (!file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
 
+    if (!collegeName) {
+      return res.status(400).json({ error: "College name is required." });
+    }
+
     let members;
     try {
       members = JSON.parse(req.body.members);
-
       if (!Array.isArray(members)) throw new Error();
 
       const isValid = members.every(
@@ -24,7 +27,6 @@ export const registerTeam = async (req, res) => {
       if (!isValid) {
         return res.status(400).json({ error: "All member fields are required." });
       }
-
     } catch (error) {
       return res.status(400).json({ error: "Invalid members format" });
     }
@@ -33,14 +35,21 @@ export const registerTeam = async (req, res) => {
       return res.status(400).json({ error: "A team can have a maximum of 5 members." });
     }
 
+    // Step 1: Upload file to cloudinary
     const uploadResponse = await cloudinary.uploader.upload(file.path, {
       folder: "hackathon_payments",
     });
 
+    // Step 2: Generate sequential teamId
+    const teamCount = await Team.countDocuments();
+    const teamId = `team${teamCount + 1}`;
+
+    // Step 3: Create new team
     const newTeam = await Team.create({
+      teamId, // <- this is our generated ID
       teamName,
       track,
-      collagename,
+      collegeName,
       members,
       paymentScreenshot: uploadResponse.secure_url,
     });
@@ -50,6 +59,7 @@ export const registerTeam = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
 
 
 /** Get All Teams */
