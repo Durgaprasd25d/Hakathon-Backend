@@ -40,6 +40,7 @@ export const registerTeam = async (req, res) => {
     const newTeam = await Team.create({
       teamName,
       track,
+      collagename,
       members,
       paymentScreenshot: uploadResponse.secure_url,
     });
