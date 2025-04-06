@@ -4,7 +4,7 @@ import cloudinary from "../config/cloudinary.js";
 /** Register a Team */
 export const registerTeam = async (req, res) => {
   try {
-    const { teamName, track, collagename } = req.body;
+    const { teamName, track } = req.body;
     const file = req.file;
 
     if (!file) {
